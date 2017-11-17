@@ -3,6 +3,17 @@
         <title>USPS Form!</title>
     </head>
     <body>
-        
+        <h1>Calculate-a-Rate!</h1>
+        <form action="/getRate" method="get">
+            Weight: <br>
+            <input type="text"> <br>
+            <select name="type">
+                <option value="1">Letters (Stamped)</option>
+                <option value="1">Letters (Metered)</option>
+                <option value="1">Large Envelopes (Flats)</option>
+                <option value="1">Parcels</option>
+            </select> <br>
+            <input type="submit" value="get rate">
+        </form>
     </body>
 </html>
