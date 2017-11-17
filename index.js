@@ -15,6 +15,10 @@ app.get('/', function(request, response) {
   response.render('pages/index');
 });
 
+app.get('/getRate', function(request, response) {
+  response.render('pages/rateCal');
+});
+
 app.get('/cool', function(request, response) {
   response.send(cool());
 });
