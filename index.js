@@ -16,7 +16,7 @@ app.get('/', function(request, response) {
 });
 
 app.get('/getRate', function(request, response) {
-  response.render('pages/rateCal');
+  handleMath(request, response);
 });
 
 app.get('/cool', function(request, response) {
@@ -46,3 +46,64 @@ app.get('/db', function (request, response) {
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });
+
+function handleMath(request, response) {
+	var requestUrl = url.parse(request.url, true);
+
+	console.log("Query parameters: " + JSON.stringify(requestUrl.query));
+
+	// TODO: Here we should check to make sure we have all the correct parameters
+
+  var weight = Number(requestUrl.query.weight);
+	var mailType = requestUrl.query.type;
+
+	computeOperation(response, weight, mailType);
+}
+
+function computeOperation(response, weight, type) {
+  type = type.toLowerCase();
+  // weight = Math.floor(weight);
+
+	var result = 0;
+
+	if (type == "letters (stamped)") {
+		if (weight < 1) {
+      result = 0.49;
+    } else if (weight >= 1 || weight < 2) {
+      result = 0.70;
+    } else if (weight >= 2 || weight < 3) {
+      result = 0.91;
+    } else if (weight >= 3 || weight <= 3.5) {
+      result = 1.12;
+    } else {
+      result = 0;
+    }
+	} else if (type == "letters (metered)") {
+		if (weight < 1) {
+      result = 0.46;
+    } else if (weight >= 1 || weight < 2) {
+      result = 0.67;
+    } else if (weight >= 2 || weight < 3) {
+      result = 0.88;
+    } else if (weight >= 3 || weight <= 3.5) {
+      result = 1.09;
+    } else {
+      result = 0;
+    }	
+	} else if (type == "large envelopes (flats)") {
+		result = 0;
+	} else if (type == "parcels") {
+		result = 0;
+	} else {
+		// It would be best here to redirect to an "unknown operation"
+		// error page or something similar.
+	}
+
+	// Set up a JSON object of the values we want to pass along to the EJS result page
+	var params = {weight: weight, type: type, result: result};
+
+	// Render the response, using the EJS page "result.ejs" in the pages directory
+	// Makes sure to pass it the parameters we need.
+	response.render('pages/rateCal', params);
+
+}
