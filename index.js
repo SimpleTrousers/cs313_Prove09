@@ -61,38 +61,35 @@ function handleMath(request, response) {
 }
 
 function computeOperation(response, weight, type) {
-  type = type.toLowerCase();
-  // weight = Math.floor(weight);
-
 	var result = 0;
 
-	if (type == "letters (stamped)") {
+	if (type == "Letters (Stamped)") {
 		if (weight < 1) {
       result = 0.49;
-    } else if (weight >= 1 || weight < 2) {
+    } else if (weight >= 1 && weight < 2) {
       result = 0.70;
-    } else if (weight >= 2 || weight < 3) {
+    } else if (weight >= 2 && weight < 3) {
       result = 0.91;
-    } else if (weight >= 3 || weight <= 3.5) {
+    } else if (weight >= 3 && weight <= 3.5) {
       result = 1.12;
     } else {
       result = 0;
     }
-	} else if (type == "letters (metered)") {
+	} else if (type == "Letters (Metered)") {
 		if (weight < 1) {
       result = 0.46;
-    } else if (weight >= 1 || weight < 2) {
+    } else if (weight >= 1 && weight < 2) {
       result = 0.67;
-    } else if (weight >= 2 || weight < 3) {
+    } else if (weight >= 2 && weight < 3) {
       result = 0.88;
-    } else if (weight >= 3 || weight <= 3.5) {
+    } else if (weight >= 3 && weight <= 3.5) {
       result = 1.09;
     } else {
       result = 0;
     }	
-	} else if (type == "large envelopes (flats)") {
+	} else if (type == "Large Envelopes (Flats)") {
 		result = 0;
-	} else if (type == "parcels") {
+	} else if (type == "Parcels") {
 		result = 0;
 	} else {
 		// It would be best here to redirect to an "unknown operation"
