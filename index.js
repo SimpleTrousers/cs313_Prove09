@@ -53,8 +53,6 @@ function handleMath(request, response) {
 
 	console.log("Query parameters: " + JSON.stringify(requestUrl.query));
 
-	// TODO: Here we should check to make sure we have all the correct parameters
-
   var weight = Number(requestUrl.query.weight);
 	var mailType = requestUrl.query.type;
 
@@ -89,19 +87,68 @@ function computeOperation(response, weight, type) {
       result = 0;
     }	
 	} else if (type == "Large Envelopes (Flats)") {
-		result = 0;
+		if (weight < 1) {
+      result = 0.98;
+    } else if (weight >= 1 && weight < 2) {
+      result = 1.19;
+    } else if (weight >= 2 && weight < 3) {
+      result = 1.40;
+    } else if (weight >= 3 && weight < 4) {
+      result = 1.61;
+    } else if (weight >= 4 && weight < 5) {
+      result = 1.82;
+    } else if (weight >= 5 && weight < 6) {
+      result = 2.03;
+    } else if (weight >= 6 && weight < 7) {
+      result = 2.24;
+    } else if (weight >= 7 && weight < 8) {
+      result = 2.45;
+    } else if (weight >= 8 && weight < 9) {
+      result = 2.66;
+    } else if (weight >= 9 && weight < 10) {
+      result = 2.87;
+    } else if (weight >= 10 && weight < 11) {
+      result = 3.08;
+    } else if (weight >= 11 && weight < 12) {
+      result = 3.29;
+    } else if (weight >= 12 && weight <= 13) {
+      result = 3.50;
+    } else {
+      result = 0;
+    }	
 	} else if (type == "Parcels") {
-		result = 0;
-	} else {
-		// It would be best here to redirect to an "unknown operation"
-		// error page or something similar.
-	}
-
-	// Set up a JSON object of the values we want to pass along to the EJS result page
+		if (weight < 1) {
+      result = 6.65;
+    } else if (weight >= 1 && weight < 2) {
+      result = 7.20;
+    } else if (weight >= 2 && weight < 3) {
+      result = 7.80;
+    } else if (weight >= 3 && weight < 4) {
+      result = 8.50;
+    } else if (weight >= 4 && weight < 5) {
+      result = 9.85;
+    } else if (weight >= 5 && weight < 6) {
+      result = 10.40;
+    } else if (weight >= 6 && weight < 7) {
+      result = 11.05;
+    } else if (weight >= 7 && weight < 8) {
+      result = 11.40;
+    } else if (weight >= 8 && weight < 9) {
+      result = 11.90;
+    } else if (weight >= 9 && weight < 10) {
+      result = 12.65;
+    } else if (weight >= 10 && weight < 11) {
+      result = 13.50;
+    } else if (weight >= 11 && weight < 12) {
+      result = 14.25;
+    } else if (weight >= 12 && weight <= 13) {
+      result = 15.10;
+    } else {
+      result = 0;
+    }
+  }
+  
 	var params = {weight: weight, type: type, result: result};
 
-	// Render the response, using the EJS page "result.ejs" in the pages directory
-	// Makes sure to pass it the parameters we need.
 	response.render('pages/rateCal', params);
-
 }
