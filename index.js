@@ -1,6 +1,7 @@
 var cool = require('cool-ascii-faces');
 var pg = require('pg');
 var express = require('express');
+var url = require("url");
 var app = express();
 
 app.set('port', (process.env.PORT || 5000));
@@ -57,7 +58,7 @@ function handleMath(request, response) {
   var weight = Number(requestUrl.query.weight);
 	var mailType = requestUrl.query.type;
 
-	computeOperation(response, weight, mailType);
+	computeOperation(response, weight, mailType) ;
 }
 
 function computeOperation(response, weight, type) {
