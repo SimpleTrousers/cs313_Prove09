@@ -64,38 +64,38 @@ function handleMath(request, response) {
 function computeOperation(response, weight, type) {
 	var result = 0;
 
-	// if (type == "Letters (Stamped)") {
-	// 	if (weight < 1) {
-  //     result = 0.49;
-  //   } else if (weight >= 1 && weight < 2) {
-  //     result = 0.70;
-  //   } else if (weight >= 2 && weight < 3) {
-  //     result = 0.91;
-  //   } else if (weight >= 3 && weight <= 3.5) {
-  //     result = 1.12;
-  //   } else {
-  //     result = 0;
-  //   }
-	// } else if (type == "Letters (Metered)") {
-	// 	if (weight < 1) {
-  //     result = 0.46;
-  //   } else if (weight >= 1 && weight < 2) {
-  //     result = 0.67;
-  //   } else if (weight >= 2 && weight < 3) {
-  //     result = 0.88;
-  //   } else if (weight >= 3 && weight <= 3.5) {
-  //     result = 1.09;
-  //   } else {
-  //     result = 0;
-  //   }	
-	// } else if (type == "Large Envelopes (Flats)") {
-	// 	result = 0;
-	// } else if (type == "Parcels") {
-	// 	result = 0;
-	// } else {
-	// 	// It would be best here to redirect to an "unknown operation"
-	// 	// error page or something similar.
-	// }
+	if (type == "Letters (Stamped)") {
+		if (weight < 1) {
+      result = 0.49;
+    } else if (weight >= 1 && weight < 2) {
+      result = 0.70;
+    } else if (weight >= 2 && weight < 3) {
+      result = 0.91;
+    } else if (weight >= 3 && weight <= 3.5) {
+      result = 1.12;
+    } else {
+      result = 0;
+    }
+	} else if (type == "Letters (Metered)") {
+		if (weight < 1) {
+      result = 0.46;
+    } else if (weight >= 1 && weight < 2) {
+      result = 0.67;
+    } else if (weight >= 2 && weight < 3) {
+      result = 0.88;
+    } else if (weight >= 3 && weight <= 3.5) {
+      result = 1.09;
+    } else {
+      result = 0;
+    }	
+	} else if (type == "Large Envelopes (Flats)") {
+		result = 0;
+	} else if (type == "Parcels") {
+		result = 0;
+	} else {
+		// It would be best here to redirect to an "unknown operation"
+		// error page or something similar.
+	}
 
 	// Set up a JSON object of the values we want to pass along to the EJS result page
 	var params = {weight: weight, type: type, result: result};
